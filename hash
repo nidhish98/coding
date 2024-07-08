@@ -1,0 +1,177 @@
+include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    //precompute:
+    int hash[13] = {0};
+    for (int i = 0; i < n; i++) {
+        hash[arr[i]] += 1;
+    }
+
+    int q;
+    cin >> q;
+    while (q--) {
+        int number;
+        cin >> number;
+        // fetching:
+        cout << hash[number] << endl;
+    }
+    return 0;
+}
+globally-10^7 array size
+main-10^6 array size is max
+ascii value of A-65
+               a=97
+               string s;
+    cin >> s;
+
+    //precompute:
+    int hash[26] = {0};
+    for (int i = 0; i < s.size(); i++) {
+        hash[s[i] - 'a']++;
+    }
+
+    int q;
+    cin >> q;
+    while (q--) {
+        char c;
+        cin >> c;
+        // fetch:
+        cout << hash[c - 'a'] << endl;
+    }
+    return 0;
+}
+frequency max
+int main()
+{
+    int arr[7]={1,2,2,4,4,2,3};
+    unordered_map<int,int>mpp;
+  for(int i=0;i<7;i++){
+      mpp[arr[i]]++;
+  }
+  int max=0;
+  for(auto it:mpp )
+    {
+        if(max<it.second){
+            max=it.second;
+        }
+    }
+    cout<<max;
+    return 0;
+    
+} 
+
+in a map if an element is already present and u want to check if it there
+
+
+if(mpp.find(s[i])!=mpp.end()){
+
+    means he has found someone.
+}
+else{
+    nahi mila
+}
+
+
+string 
+  vector<string> uncommonFromSentences(string s1, string s2) {
+
+        vector<string>ans1;
+      vector<string>ans2;
+      vector<string>ans;
+      unordered_map<string,int>map;
+      int n=s1.size();
+      int m=s2.size();
+      string temp1="";
+      string temp2="";
+                   for(int i=0;i<n;i++){
+             
+            if(s1[i]!=' '){
+                
+                temp1=temp1+s1[i];
+            }
+            else{
+                map[temp1]++;
+                temp1="";
+            }
+            
+
+          }
+          if(temp1!=""){
+              map[temp1]++;
+        temp1 = ""; 
+          }
+           for(int i=0;i<m;i++){
+             
+            if(s2[i]!=' '){
+                
+                temp2=temp2+s2[i];
+            }
+            else{
+                map[temp2]++;
+                temp2="";
+            }
+            
+
+
+          }
+          if(temp2!=""){
+              map[temp2]++;
+        temp2 = ""; 
+          }
+
+                  
+
+          for(auto it:map){
+            if(it.second==1){
+                ans.push_back(it.first);
+            }
+          }
+          return ans;
+          
+
+
+    }
+};
+
+q on isompheric string
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int n=s.size();
+        int m=t.size();
+        unordered_map<char,char>mpp1;
+          unordered_map<char,char>mpp2;
+         // 2 maps
+         if(n!=m)
+{
+    return false;
+}
+else{        
+          for(int i=0;i<n;i++){
+            char car1=s[i];
+            char car2=t[i];
+            if((mpp1.find(car1)!=mpp1.end()) && (mpp1[car1]!=car2) || (mpp2.find(car2)!=mpp2.end()) &&(mpp2[car2]!=car1)){
+           //not single
+           return false;
+            }
+            else{
+                mpp1[car1]=car2;
+                mpp2[car2]=car1;
+            }                // single
+          }
+        
+
+}
+return true;
+
+    }
+};

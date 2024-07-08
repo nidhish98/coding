@@ -1,0 +1,41 @@
+reverse
+reverse(a.begin();a.end())
+sort
+sort(a.begin(),a.end())
+
+pair of vector
+vector<pair<char,int>>vector(n);
+pair<char,int>
+vector matlab 
+A-65   Z-
+a-97   z-122
+create array from 0 to 122
+    ==[A,2 B,0  C,7]
+    #include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    // Create a vector of pairs
+    std::vector<std::pair<int, int>> pairs = {
+        {5, 2},
+        {3, 7},
+        {1, 4},
+        {6, 1}
+    };
+
+    // Sort the vector of pairs based on the first element of each pair
+    std::sort(pairs.begin(), pairs.end());
+
+    // Print the sorted vector of pairs
+    std::cout << "Sorted vector of pairs:" << std::endl;
+    for (const auto& pair : pairs) {
+        std::cout << "(" << pair.first << ", " << pair.second << ")" << std::endl;
+    }
+
+    return 0;
+}
+
+set
+set<int>set 
+used for unique element 
