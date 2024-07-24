@@ -1,0 +1,33 @@
+//isme columns and rows not defined
+vector<vector<int>> arr;
+arr[0].push_back() //wrong as row is not init
+
+
+//row define only
+vector<vector<int>> arr(n); 
+arr[0].push_back();  //correct
+arr[0].push_back(arr1);  //correct
+
+
+//column define    
+vector<vector<int>> arr(n, vector<int>(m, 0)  );  //n is row and m is column
+
+
+
+    vector<string> arr
+      ind string
+        0 "0"
+        1 "01"
+        2 "0110"
+        3 "01101001"
+        4 "0110100110010110"
+
+
+        
+    vector<vector<int>> arr
+      ind string
+        0 {0}
+        1 {0,1}
+        2 {0110}
+      
+

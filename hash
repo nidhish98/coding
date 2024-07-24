@@ -1,5 +1,25 @@
-include <bits/stdc++.h>
-using namespace std;
+//set
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        set<int> s;
+        
+        // Insert elements of nums into the set to remove duplicates
+        for (int i = 0; i < nums.size(); i++) {
+            s.insert(nums[i]);
+        }
+        
+        // Print elements of the set (if needed)
+        for (auto it = s.begin(); it != s.end(); it++) {
+            cout << *it << " ";
+        }
+        cout << endl; // to print a newline after all elements
+        
+        // Return the size of the set, which represents the number of unique elements
+        return s.size();
+    }
+};
+
 
 int main() {
 

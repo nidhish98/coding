@@ -31,6 +31,86 @@ for(int i=1;i<n;i++)
 arr[i-1]=arr[i]
 }
 temp
+//if u want to add vector +number
+code
+//4,9,3,2       +123
+        ^p         ^p 
+
+ multiply except itself
+ class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        
+    //left=0 to (nums[i-1])
+    //right = nums[i+1] to nums[n-1];
+   // answer=left*right
+   int n=nums.size();
+    vector<int>left(n);
+     vector<int>right(n);
+     left[0]=1;
+     right[n-1]=1;
+     for(int i=1;i<n;i++){
+        left[i]=nums[i-1]*left[i-1];
+     }
+     for(int j=n-2;j>=0;j--){
+        right[j]=nums[j+1]*right[j+1];}
+        vector<int>ans(n);
+        for(int i=0;i<n;i++){
+            ans[i]=left[i]*right[i];
+        }                              make left array make right array then multiply
+     
+    
+     
+   return ans;
+    }
+};
+
+3sum
+class Solution {
+    
 
 
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+ sort(nums.begin(),nums.end());     
+vector<int>ans;
+vector<vector<int>>fin;
+int n=nums.size();
+for(int i=0;i<nums.size();i++){
+    if(i>0 && nums[i]==nums[i-1]){
+        continue;
+    }
+    int target=-nums[i];    
+int left=i+1;
+int end=n-1;
+while(left<end){
+    
+    int sum=nums[left]+nums[end];
+    if(sum==target){
+      while(left<end && nums[left]==nums[left+1]){
+        left++;
+      }
+      while(left<end && nums[end]==nums[end-1]){
+            end--;
+        }
 
+         fin.push_back({-target, nums[left], nums[end]});
+      
+        left++;
+        end--;
+
+    }
+    else if(nums[left]+nums[end]<target){
+       left++;
+    }
+    else{
+     end--;
+        }
+    
+}                   //1 2 3 ..1+2+3=0 //2+3=-1    ..ek baar target to uske uper sab
+}                                                       
+return fin;
+
+   
+    }
+};  can also use set to store value (unique)

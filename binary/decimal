@@ -1,0 +1,34 @@
+class Solution {
+public:
+bool ispal(char c){
+    if(c=='a'||c=='e'||c=='i'||c=='o'|| c=='u'|| c=='A'||c=='E'||c=='I'||c=='O'|| c=='U' ){
+        return 1;
+    }
+    return 0;
+}
+    string reverseVowels(string s) {
+            int i=0;
+            int j=s.length()-1;
+
+            
+            while(i<=j){
+               if(ispal(s[i])==1 && ispal(s[j])==1){
+                swap(s[i],s[j]);
+                i++;
+                j--;
+               }
+               else if(ispal(s[i])==1 && ispal(s[j])!=1){
+                j--;
+               }
+                else if(ispal(s[i])!=1 && ispal(s[j])==1){
+                i++;}
+                 else if(ispal(s[i])!=1 && ispal(s[j])!=1){
+                i++;
+                j--;
+ 
+  }
+                }
+                return s;
+    }
+        
+};
