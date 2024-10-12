@@ -195,3 +195,73 @@ return true;
 
     }
 };
+1160
+find words that can befrom from characters
+class Solution {
+public:
+    int f(string words,unordered_map<char,int>mpp){
+          int count=0;
+        for(int i=0;i<words.length();i++){
+            mpp[words[i]]--;
+        }
+        for(auto it:mpp){
+            if(it.second<0){
+                count++;
+                break;
+            }
+        }
+        if(count==0){
+            return words.length();
+        }
+
+
+      return 0;
+    }
+    int countCharacters(vector<string>& words, string chars) {
+          //words[0]="hello"
+          //chars="hellobigg"
+           // 
+           int sum=0;
+           unordered_map<char,int>mpp;
+        for(int i=0;i<chars.length();i++){
+            mpp[chars[i]]++;
+        }
+        
+           for(int i=0;i<words.size();i++){
+            sum=sum+f(words[i],mpp);
+
+           }
+           return sum;
+    }
+};
+two sum 
+ vector<int> twoSum(vector<int>& nums, int target) {
+      unordered_map<int,int>mpp;
+      for(int i=0;i<nums.size();i++){
+        int remaining =target-nums[i];
+        if(mpp.find(remaining)!=mpp.end()){    //equal hai saya
+            return {mpp[remaining],i};
+        }
+        mpp[nums[i]]=i;
+      }
+      return {};
+    }
+};
+group of anagrams 
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>>p;
+        unordered_map<string,vector<string>>mpp;
+      for(int i=0;i<strs.size();i++){
+        string s=strs[i];
+        sort(s.begin(),s.end() );
+        mpp[s].push_back(strs[i]);
+      }
+      for(auto it:mpp){
+        p.push_back(it.second);
+      }
+          
+        
+      return p;
+
+    }
+};

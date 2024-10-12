@@ -65,7 +65,7 @@ public:
     }
 };
 
-3sum
+3sum arr1+arr2_arr3=sum
 class Solution {
     
 
@@ -114,3 +114,165 @@ return fin;
    
     }
 };  can also use set to store value (unique)
+   
+
+   if u want to find subbarray contigous
+   123 
+   1 2 3 12 123 2 23 3 
+   brute 
+   
+   for(int i=0; i<n; i++){
+            int product = 1;
+            for(int j=i; j<n; j++){
+                product *= nums[j];
+                if(product > maxProduct){
+                    maxProduct = product;
+                }
+                kadanes algorithm for maximum subbarray sum
+                nt maxSubArray(vector<int>& nums) {
+        int n=nums.size();
+        int maxsum=INT_MIN;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            if(sum==0){
+                startindex=i;    //suppose printing array
+            }
+            sum=sum+nums[i];
+            if(maxsum<sum){
+                maxsum=sum;
+                endindex=i;    //suppose printing array
+            }
+         if(sum<0){
+            sum=0;
+         }
+    }
+    return maxsum;
+    }
+};
+};
+//longest consecutive sequence in array
+class Solution {
+    bool check(vector<int>nums,int target){
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            if(nums[i]==target){
+                return true;
+            }
+        }
+        return false;
+    }
+public:
+    int longestConsecutive(vector<int>& nums) {
+       //brute
+       int n=nums.size();
+       int maximum=0;
+       for(int i=0;i<n;i++){
+        int no=nums[i];
+        int count=0;
+        while(check(nums,no)==true){
+          no=no+1;
+             count++;
+        }
+            
+            maximum=max(maximum,count);
+        }
+       
+        
+        return maximum;
+    }
+};
+ int n=nums.size();
+        sort(nums.begin(),nums.end());
+         int lastsmaller=INT_MIN;
+         int maximum=INT_MIN;
+         int count=1;
+         for(int i=0;i<n;i++){
+            if(nums[i]==lastsmaller){
+                
+            }
+            else if(nums[i]-1==lastsmaller){
+                count=count+1;
+                lastsmaller=nums[i];
+            }
+            else if(nums[i]!=lastsmaller){
+                count=1;
+                 lastsmaller=nums[i];
+
+            }
+             maximum=max(count,maximum);
+            
+         }
+        return maximum;
+    }
+};
+rotate array by k places
+class Solution {
+    public:
+    void reverse(vector<int>& nums,int start, int end){
+        while(start<=end){
+          swap(nums[start],nums[end]);
+          start++;
+          end--;
+    }}
+        
+    
+        void rotate(vector<int>& nums, int k) {
+              
+            int n=nums.size();
+             k=k%n;
+           
+            reverse(nums,0,n-k-1);
+           reverse(nums,n-k,n-1);
+             reverse(nums,0,n-1);
+           
+        }
+        
+    }; //prefix questions subb
+    subbarray sum equals k 
+    int subarraysDivByK(vector<int>& nums, int k) {
+        int sum=0;
+        int count=0;
+        int n=nums.size();
+        unordered_map<int,int>mpp;
+        
+        for(int i=0;i<n;i++){
+         sum=sum+nums[i];
+         nums[i]=sum;
+         cout<<nums[i]<<endl;
+        }
+        mpp[0]=1;
+        for(int i=0;i<n;i++){
+         int x=nums[i]%k;
+            if(x<0){
+             x=(x)+k;
+            }
+          if(mpp.find(x)!=mpp.end()){ //mil gaya
+    count=count+mpp[x];
+ 
+          }
+          mpp[x]++;
+ 
+        }
+        return count;
+     }
+ };
+ subbarray sum =k 
+ int subarraySum(vector<int>& nums, int k) {
+    int result = 0;
+    int sum = 0;
+    map<int, int> mp;
+    mp.insert({0,1});
+    int n = nums.size();
+    for(int i = 0; i<n; i++) {
+        sum += nums[i];
+        
+        if(mp.count(sum-k))
+            result += mp[sum-k];
+        
+        mp[sum]++;
+    }
+    return result;
+}
+};
+
+

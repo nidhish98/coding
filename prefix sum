@@ -1,0 +1,59 @@
+summaray
+continous subbarray sum 
+1>subbbaray sum>=2
+2> return true if sum is divisible by k
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+  
+        
+        int sum=0;
+        unordered_map<int,int>mpp;
+        int n=nums.size();
+        for(int i=0;i<nums.size();i++){
+     sum=sum+nums[i];
+    nums[i]=sum;
+        }    //completely improved
+        mpp[0]=-1;
+        for(int i=0;i<n;i++){
+            int rem=nums[i]%k;
+            if(mpp.find(rem)!=mpp.end())//mil gaya
+            { 
+                 if(i-mpp[rem]>=2){ //checked condiiton of size=3/2/5
+                return true;
+            }
+        
+        }
+            else{
+               
+                    mpp[rem]=i;
+                }
+            }
+        
+        return false;
+    }
+};
+subbarray sum equals to k 
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int i=0;
+        int j=0;
+        int count=0;
+        int sum=0;
+        unordered_map<int,int>mpp;
+        for(int i=0;i<nums.size();i++){
+     sum=sum+nums[i];
+    nums[i]=sum;
+        }
+        mpp[0]=1;
+        for(int i=0;i<nums.size();i++){
+
+            if(mpp.find(nums[i]-k)!=mpp.end()){  //mil gaya koi bhich vala       
+            count=count+mpp[nums[i]-k];}
+        
+        mpp[nums[i]]++;
+        }
+     return count;
+    }    
+};

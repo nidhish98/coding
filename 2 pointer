@@ -51,7 +51,7 @@ public:
        return nums.size(); 
     }  
 };
-removing duplicate 
+removing duplicate  
 olution {
     public:
         int removeDuplicates(vector<int>& nums) {

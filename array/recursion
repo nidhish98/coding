@@ -310,3 +310,43 @@ int main() {
 
     return 0;
 }
+https://leetcode.com/problems/letter-case-permutation/submissions/1358121201/
+ public:
+char to_upper(char c){
+    if(c>='a' && c<='z'){
+        return (c-'a'+'A');
+    }
+    return c;
+}
+char to_lower(char c){
+    if(c>='A' && c<='Z'){
+        return (c-'A'+'a');
+    }
+    return c;
+}
+
+
+void f(int i,int n,set<string>&st,string s){
+if(i==n){
+    st.insert(s);
+    return;
+}
+s[i]=to_upper(s[i]);
+f(i+1,n,st,s);
+s[i]=to_lower(s[i]);
+f(i+1,n,st,s);
+
+}
+
+
+    vector<string> letterCasePermutation(string s) {
+        set<string>st;
+        int n=s.length();
+        f(0,n,st,s);
+        vector<string>ans;
+        for(auto it:st){
+ans.push_back(it);
+        }
+        return ans;
+    }
+};

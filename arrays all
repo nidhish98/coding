@@ -1,4 +1,25 @@
+ FINDING MIN MAX SECOND THIRD 
+ JUST MAKE ARROW 
+ --ARR[I]---FMIN--ARR[I]--SMIN--ARR[I]
+ first = second = INT_MAX;
+    for (i = 0; i < arr_size; i++) {
+        /* If current element is smaller than first
+        then update both first and second */
+        if (arr[i] < first) {
+            second = first;
+            first = arr[i];
+        }
+ 
+        /* If arr[i] is in between first and second
+        then update second */
+        else if (arr[i] < second && arr[i] != first)
+            second = arr[i];
+    }
+
+
 check if array sorted
+
+
 for(int i=1;i<n;i++){
     if(arr[i]>arr[i-1]){
         count

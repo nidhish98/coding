@@ -1,4 +1,102 @@
 dp (recursion finding all ways)
 //think of ways
 //base case  jitna change utna size of dp(1d array if one variable change)
+dp
+1 top down (rec+memoization)
+2 bottom up(tabular)
+first problem on frog jump
+min energy such that frog jump from 1 to 2 or 1 to 3
+nt f(int i,vector<int>&dp,vector<int>&heights) {
+  
+    // Write your code here fibonacii
+    
+    .
+    int f(int i,int n,vector<int>&dp){
+         if(i==0 ||i==1){
+                 return i; 
+         }
+       
+         if(dp[i]!=-1){
+                 return dp[i];
+         }
+         return dp[i]=f(i-1,n,dp)+f(i-2,n,dp);
+         return dp[n];
+ }
+int main()
+{
+            int n;
+            cin>>n;
+            vector<int>dp(n+1,-1);
+   int ans=f(n,n,dp);
+   cout<<ans;
+}
+
+  int n=height.size();
+  vector<int> dp(n,-1);
+  dp[0]=0;
+  for(int ind=1;ind<n;ind++){
+      int jumpTwo = INT_MAX;
+        int jumpOne= dp[ind-1] + abs(height[ind]-height[ind-1]);
+        if(ind>1)
+            jumpTwo = dp[ind-2] + abs(height[ind]-height[ind-2]);
+    
+        dp[ind]=min(jumpOne, jumpTwo);
+  }
+  cout<<dp[n-1];
+easy
+int solve(int ind, vector<int>& height, vector<int>& dp){
+    if(ind==0) return 0;
+    if(dp[ind]!=-1) return dp[ind];
+    int jumpTwo = INT_MAX;
+    int jumpOne= solve(ind-1, height,dp)+ abs(height[ind]-height[ind-1]);
+    if(ind>1)
+        jumpTwo = solve(ind-2, height,dp)+ abs(height[ind]-height[ind-2]);
+    
+    return dp[ind]=min(jumpOne, jumpTwo);
+}
+
+
+int main() {
+
+  vector<int> height{30,10,60 , 10 , 60 , 50};
+  int n=height.size();
+  vector<int> dp(n,-1);
+  cout<<solve(n-1,height,dp);
+}
+
+
+maximum adjscent sun
+#include <bits/stdc++.h> 
+
+int f(int i, vector<int> &nums, vector<int> &dp) {
+    int steal = 0;
+    if (i == 0) {
+        return nums[0];
+    }
+    if(i<0){
+        return 0;
+    }
+     
+        if (dp[i] != -1) {
+            return dp[i];
+        }
+        
+            steal = f(i - 2, nums, dp) + nums[i];
+        
+        int skip = f(i - 1, nums, dp);
+        return dp[i] = max(steal, skip);
+    }
+
+
+int maximumNonAdjacentSum(vector<int> &nums) {
+    int n = nums.size();
+    vector<int> dp(n, -1);
+    int ans = f(n - 1, nums, dp);
+    return ans;
+}
+
+
+
+
+
 

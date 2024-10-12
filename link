@@ -1,0 +1,14 @@
+//deleting a value at given node 
+
+void deleteNode(ListNode* node) {
+        struct ListNode *ptr;
+        while(node->next!=NULL ){
+            node->val=(node->next)->val;
+            ptr=node;
+            node=node->next;
+               
+        }
+        ptr->next=NULL;
+        delete(node);
+     
+    }

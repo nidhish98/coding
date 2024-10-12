@@ -1,0 +1,27 @@
+trees
+nodes=edges+1
+create a bt 
+// Function to build a binary tree recursively
+Node* buildTree() {
+    int value;
+    cout << "Enter value (-1 for no node): ";
+    cin >> value;
+
+    // If the user enters -1, we return NULL (no node)
+    if (value == -1) {
+        return nullptr;
+    }
+
+    // Create a new node with the current value
+    Node* newNode = new Node(value);
+
+    // Recursively build the left and right subtrees
+    cout << "Enter left child of " << value << ": " << endl;
+    newNode->left = buildTree();  // Recursive call for the left subtree
+
+    cout << "Enter right child of " << value << ": " << endl;
+    newNode->right = buildTree(); // Recursive call for the right subtree
+
+    return newNode;
+}
+po

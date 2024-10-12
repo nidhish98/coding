@@ -1,0 +1,40 @@
+class Solution {
+   public: int calPoints(vector<string>& operations) {
+        stack<int>st;
+        for(int i=0;i<operations.size();i++){
+            
+           if(operations[i]=="D"){
+            int top=st.top();
+            int doub=2*top;
+            st.push(doub);
+
+          }
+          else if(operations[i]=="C"){
+            st.pop();
+
+        }
+          else if(operations[i]=="C"){
+            st.pop();
+
+    }
+    else if(operations[i]=="+"){
+        int ans1=st.top();
+        st.pop();
+        int ans2=st.top();
+        st.push(ans1);
+        st.push(ans1+ans2);
+    }
+    else{
+        st.push(stoi(operations[i]));
+    }
+    }
+    int sum=0;
+   while(!st.empty()){
+        int first=st.top();
+        sum=sum+first;
+        st.pop();
+    }
+    return sum;
+        }
+};
+https://leetcode.com/problems/backspace-string-compare/submissions/1335387396/

@@ -43,3 +43,121 @@ public:
 
   
 };
+a way of chekcing if ek ke baad ek same or different
+for(int i=0;i<password.length()-1;i++){  //subbaray
+    for(int j=i+1;j<password.length();j++){
+        for(int k=i;k<j;k++){
+      if(password[k]==password[k+1]){
+     return false;
+        break;
+      }}
+}   k=1,n
+or while(k<n-1 &&k>0){
+    if(password[k]==password[k-1]){
+        return false;
+    }
+    k++;
+}
+important string question valid palindrome
+class Solution {
+    char tolo(char c){
+        if(c>='a' && c<='z'){
+            return c;
+        }
+        else if(c>='A' && c<='Z'){
+            return c-'A'+'a';
+        }
+        else if(c>='0' && c<='9'){
+            return c;
+        }
+        
+        return 'a';
+    }
+    bool alpha(char c){
+         if(c>='a' && c<='z'){
+            return false;
+        }
+        else if(c>='A' && c<='Z'){
+            return false;
+        }
+         else if(c>='0' && c<='9'){
+            return false;
+        }
+        return true;
+    }
+    
+public:
+    bool isPalindrome(string s) {
+       int i=0;
+       int j=s.length()-1;
+       while(i<=j){ 
+       while( i<j && alpha(s[i])){
+        i++;
+       }
+       while(i<j && alpha(s[j])){
+        j--;
+        cout<<j<<endl; 
+       }
+     if (tolo(s[i])!=tolo(s[j])){
+        return false;
+       }
+       i++;
+       j--;
+        }
+       
+
+
+       
+       
+  
+   return true;
+    }
+};
+#include <iostream>
+using namespace std;
+
+long repeatedString(string s, long n) {
+    long count = 0;
+
+    // Case when string length is greater than or equal to n
+    if (s.length() >= n) {
+        for (int i = 0; i < n; i++) { // Use n, not 10
+            if (s[i] == 'a') {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // Case when n is larger than the string length
+    long conc1 = n / s.length();  // How many full times the string fits in n
+    long count2 = 0, count3 = 0;
+
+    // Count 'a' in the full string s
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == 'a') {
+            count2++;
+        }
+    }
+
+    // Calculate the remainder of the string (partial repetition)
+    long rem = n % s.length();
+
+    // Count 'a' in the remainder part
+    for (int i = 0; i < rem; i++) {
+        if (s[i] == 'a') {
+            count3++;
+        }
+    }
+
+    // Total 'a' = (count2 * number of full repetitions) + 'a' count in the remainder
+    return (count2 * conc1) + count3;
+}
+
+int main() {
+    string s = "abcac";
+    long n = 10;
+    cout << repeatedString(s, n) << endl;  // Expected output: 4
+    return 0;
+}
+
