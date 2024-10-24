@@ -1,0 +1,15 @@
+TreeNode *find(int x,TreeNode *root){
+      if(root==nullptr){
+        return root;
+    }
+    if(root->val==x){
+        return root;
+    }
+
+  TreeNode *ans=find(x,root->left);
+    if(ans==nullptr){
+   ans= find(x,root->right);}
+    return ans;
+    
+ }
+ cousin 

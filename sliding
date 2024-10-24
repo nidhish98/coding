@@ -43,12 +43,12 @@ public:
         int i=0;
         int j=0;
         while(j<n && i<=j){
-            prod=prod*nums[j];
-            while(prod>=k){
+            prod=prod*nums[j];   //ye har bar karna hai
+            while(prod>=k){  //condition break
                  prod /= nums[i++];
             }
-            count=count+(j-i+1);
-            j++;
+            count=count+(j-i+1); //jo count hai
+            j++;    
         }
     
          

@@ -161,3 +161,49 @@ int main() {
     return 0;
 }
 
+c++
+adding string (convert int into string )
+s[0]=(ans/10)+'0'; //to convert into a string      
+            s[1]=ans%10+'0';  
+        string s='' no
+        string s="" yesss
+        stringstream 
+        int main() {
+    string s = "Hello world this is C++";
+    stringstream ss(s);  // Create a stringstream object from the string
+
+    string word;
+    while (ss >> word) {  // Extract words from the string stream
+        cout << word << endl;  // Output each word on a new line
+    }
+
+    return 0;
+}   ?///reverse of the a string of stence from backward
+string reverseWords(string s) {
+        string finalans="";
+        int n=s.length();
+        stringstream ss(s);  //create a stringstream of s
+        string word;
+        while(ss>>word){ 
+              //extract words from the stringstream
+              if(!finalans.empty()){
+           finalans=word+" "+finalans;}
+           else{
+            finalans=word;
+           }
+        }
+        return finalans;
+        wowowowow to convert a string into its divisional parts we use stringstream 
+         string s="1.2.3.4";
+    string token;
+    vector<string>v;
+    stringstream ss(s);
+    while(getline(ss,token,'.')){
+        v.push_back(token);
+    }
+    for(int i=0;i<v.size();i++){
+        cout<<v[i];   // 1 2 3 4 will get printed
+    }
+  
+    return 0;
+}

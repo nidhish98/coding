@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "definition": "c"
+        "definition": "c",
+        "bfs (level order q)": "cpp"
     }
 }

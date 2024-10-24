@@ -1,0 +1,234 @@
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>>v;
+    if(root==nullptr){  //wvery imp
+        return v;
+    }
+      queue<TreeNode*>q;
+      q.push(root);
+      while(!q.empty()){
+        int n=q.size();
+         vector<int>v2;
+        for(int i=0;i<n;i++){ /////hereee the no of times it happoens depends on queue size 
+      
+        TreeNode *ans=q.front();
+        
+        if(ans->left!=nullptr){
+        q.push(ans->left);}
+        if(ans->right!=nullptr){
+        q.push(ans->right);}
+        v2.push_back(ans->val);
+        q.pop();
+        }
+        v.push_back(v2);
+      }
+      
+      return v;}
+};
+findong avg of each level in tree 
+vector<double> averageOfLevels(TreeNode* root) {
+        vector<double>v;
+        if(root==nullptr){
+            return v;
+        }
+        double sum=0;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            sum=0;
+             int n=q.size();
+             for(int i=0;i<n;i++){
+                
+                TreeNode *ans=q.front();
+             
+                sum=sum+(double)ans->val;
+                if(ans->left!=NULL){
+                    q.push(ans->left);
+                }
+                if(ans->right!=NULL){
+                    q.push(ans->right);
+                }
+                q.pop();
+             }
+             v.push_back((double)sum/n);
+        }
+        return v;
+    }
+};
+\zig zag traversal dumb apporach 
+just reverse the vector
+finding level order successor
+CPP program to find Levelorder
+// successor of given node in the
+// Binary Tree
+ 
+#include <bits/stdc++.h>
+using namespace std;
+ 
+// Tree Node
+struct Node {
+    struct Node *left, *right;
+    int value;
+};
+ 
+// Utility function to create a
+// new node with given value
+struct Node* newNode(int value)
+{
+    Node* temp = new Node;
+    temp->left = temp->right = NULL;
+    temp->value = value;
+ 
+    return temp;
+}
+ 
+// Function to find the Level Order Successor
+// of a given Node in Binary Tree
+Node* levelOrderSuccessor(Node* root, Node* key)
+{
+    // Base Case
+    if (root == NULL)
+        return NULL;
+ 
+    // If root equals to key
+    if (root == key) {
+ 
+        // If left child exists it will be
+        // the Postorder Successor
+        if (root->left)
+            return root->left;
+ 
+        // Else if right child exists it will be
+        // the Postorder Successor
+        else if (root->right)
+            return root->right;
+        else
+            return NULL; // No Successor
+    }
+ 
+    // Create an empty queue for level
+    // order traversal
+    queue<Node*> q;
+ 
+    // Enqueue Root
+    q.push(root);
+ 
+    while (!q.empty()) {
+        Node* nd = q.front();
+        q.pop();
+ 
+        if (nd->left != NULL) {
+            q.push(nd->left);
+        }
+ 
+        if (nd->right != NULL) {
+            q.push(nd->right);
+        }
+ 
+        if (nd == key)
+            break;
+    }
+ 
+    return q.front();
+}
+equaltree 
+
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+       if (p == nullptr && q == nullptr) {
+            return true;
+        }
+        // If only one of the trees is empty, they are not the same
+        if (p == nullptr || q == nullptr) {
+            return false;
+        }
+        TreeNode* root1=p;
+        TreeNode* root2=q;
+       //bfs queue
+       queue<TreeNode*>x;
+       x.push(p);
+       x.push(q);
+       while(!x.empty()){
+            
+            TreeNode *temp1=x.front();
+                  x.pop();
+             TreeNode *temp2=x.front();
+             x.pop();
+             if(temp1==nullptr &&temp2==nullptr){
+                continue;
+             }
+else if(temp1==nullptr && temp2!=nullptr){
+                return false;
+             }else if(temp2==nullptr && temp1!=nullptr){
+                return false;
+             }             
+             else if (temp1->val!=temp2->val){
+                cout<<temp1->val<<" "<<temp2->val<<endl;
+                return false;
+             }
+                          
+                x.push(temp1->left);
+                       
+                x.push(temp2->left);
+             
+                        
+                x.push(temp1->right);
+             
+        
+                x.push(temp2->right);
+             
+
+       }
+       return 1;
+
+        }
+    
+};
+finding cousin of a tree 
+class Solution {
+public:
+ TreeNode *find(int x,TreeNode *root){
+      if(root==nullptr){
+        return root;
+    }
+    if(root->val==x){
+        return root;
+    }
+
+  TreeNode *ans=find(x,root->left);
+    if(ans==nullptr){
+   ans= find(x,root->right);}
+    return ans;
+ }
+ bool sibling(TreeNode *root,TreeNode *x,TreeNode *y){
+    if(root==nullptr){
+        return false;
+    }
+    return(root->left==x && root->right==y||root->left==y && root->right==x||
+    (sibling(root->left,x,y)) ||(sibling(root->right,x,y)));
+ }
+ int level(TreeNode* root,TreeNode* x,int val){
+    if(root==NULL){
+        return NULL;
+    }
+    if(root==x){
+        return val;
+    }
+    int z=level(root->left,x,val+1);
+if(z==NULL){
+    z=level(root->right,x,val+1);
+}
+return z;
+ }
+ 
+
+    bool isCousins(TreeNode* root, int x, int y) {
+        TreeNode *xx=find(x,root);
+        TreeNode *yy=find(y,root);
+        //check for sibling  
+        return ((!sibling(root,xx,yy)) && (level(root,xx,0)==level(root,yy,0)));
+    
+
+        return 0;
+    }
+};
