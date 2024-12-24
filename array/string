@@ -1,5 +1,5 @@
 stoi and to_string
-
+string me dont add use push_back
 string s = "10";
 int x = ?
 int x = stoi(s);   // x = 10
@@ -193,7 +193,7 @@ string reverseWords(string s) {
            }
         }
         return finalans;
-        wowowowow to convert a string into its divisional parts we use stringstream 
+         to convert a string into its divisional parts we use stringstream 
          string s="1.2.3.4";
     string token;
     vector<string>v;
@@ -207,3 +207,41 @@ string reverseWords(string s) {
   
     return 0;
 }
+generate all substrings of a string 
+class Solution {
+public:
+   bool isvalid(string s){
+    //hash se karenge at most one letter appears odd;
+    unordered_map<char,int>mpp;
+    for(int i=0;i<s.length();i++){
+        mpp[s[i]]++;
+    }
+    int count=0;
+    for(auto it:mpp){
+        if(it.second%2!=0){   //odd condition
+        count++;
+        }}
+        if( count>1){
+            return false;
+        }
+        return 1;
+
+    }
+
+   
+    long long wonderfulSubstrings(string word) {
+        string ans="";
+        int i=0;
+        int j=0;
+        int c=0;
+        for(int i=0;i<word.length();i++){
+            for(int j=i;j<word.length();j++){
+                if(isvalid(word.substr(i,j-i+1))){
+                    cout<<word.substr(i,j-i+1)<<endl;
+                    c++;
+                }
+            }
+        }
+        return c;
+    }
+};

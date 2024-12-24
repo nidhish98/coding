@@ -24,4 +24,449 @@ Node* buildTree() {
 
     return newNode;
 }
-po
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of a Node
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Function to create a new Node
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// Preorder traversal function
+void printPreorder(struct Node* node) {
+    if (node == NULL)
+        return;
+
+    // First print the data of the node
+    printf("%d ", node->data);
+
+    // Then recur on the left subtree
+    printPreorder(node->left);
+
+    // Finally recur on the right subtree
+    printPreorder(node->right);
+}
+
+int main() {
+    // Creating a sample binary tree
+    /*
+            1
+           / \
+          2   3
+         / \
+        4   5
+    */
+
+    struct Node* root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+
+    printf("Preorder traversal of the binary tree is: ");
+    printPreorder(root);  // This will print: 1 2 4 5 3
+
+    return 0;
+}
+INSERTION 
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define a structure for the binary tree node
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a node in the binary tree
+struct Node* insertNode(struct Node* root, int data) {
+    if (root == NULL) {
+        // If the tree is empty, create a new node
+        root = createNode(data);
+    } else if (data < root->data) {
+        // Insert in the left subtree if the data is less than root's data
+        root->left = insertNode(root->left, data);
+    } else {
+        // Insert in the right subtree if the data is greater than root's data
+        root->right = insertNode(root->right, data);
+    }
+    return root;
+}
+
+// In-order traversal of the binary tree (left, root, right)
+void inOrderTraversal(struct Node* root) {
+    if (root != NULL) {
+        inOrderTraversal(root->left);      // Visit the left subtree
+        printf("%d ", root->data);         // Visit the root
+        inOrderTraversal(root->right);     // Visit the right subtree
+    }
+}
+
+// Main function to create and traverse the binary tree
+int main() {
+    struct Node* root = NULL;
+
+    // Insert nodes into the binary tree
+    root = insertNode(root, 50);
+    insertNode(root, 30);
+    insertNode(root, 20);
+    insertNode(root, 40);
+    insertNode(root, 70);
+    insertNode(root, 60);
+    insertNode(root, 80);
+
+    // In-order traversal of the tree
+    printf("In-order traversal of the binary tree:\n");
+    inOrderTraversal(root);
+
+    return 0;
+}
+
+2 ways of inserion
+struct Node* insert(struct Node* root, int key){
+    struct node *ptr=createNode(5);
+    struct Node *p=NULL;
+    while(root!=NULL){
+        p=root;
+        if(root->data>key){
+            root=root->left;
+        }
+        else if(root->data<key){
+            root=root->right;
+        }
+        else{
+            printf("not possigle");
+        }
+    }
+    p->right=ptr; //check condition of big/small
+}
+
+
+// Function to insert a node in the binary tree
+struct Node* insertNode(struct Node* root, int data) {
+    if (root == NULL) {
+        // If the tree is empty, create a new node
+        root = createNode(data);
+    } else if (data < root->data) {
+        // Insert in the left subtree if the data is less than root's data
+        root->left = insertNode(root->left, data);
+    } else {
+        // Insert in the right subtree if the data is greater than root's data
+        root->right = insertNode(root->right, data);
+    }
+    return root;
+}
+final code for insettion and deletion
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a node in the BST
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Helper function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Helper function to find the minimum value node in a subtree
+  
+
+// Function to delete a node from the BST
+struct Node* deleteNode(struct Node* root, int key) {
+   
+
+    // Recursive cases: search for the node to be deleted
+    if (key < root->data) {
+        // If the key to be deleted is smaller than root's key, go to the left subtree
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        // If the key to be deleted is greater than root's key, go to the right subtree
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Node to be deleted is found
+
+        // Case 1: Node has no child (is a leaf node)
+        if (root->left == NULL && root->right == NULL) {
+            free(root);
+            return NULL;
+        }
+
+        // Case 2: Node has one child
+        if (root->left == NULL) {
+            struct Node* temp = root->right;
+            free(root);
+            return temp;
+            
+        } 
+        else if (root->right == NULL) {
+            struct Node* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        // Case 3: Node has two children
+        // Find the in-order successor (smallest value in the right subtree)
+        struct Node* temp = findMin(root->right);
+
+        // Copy the in-order successor's content to this node
+        root->data = temp->data;
+
+        // Delete the in-order successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+// Function to insert a new node in the BST
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+// Helper function to print the tree (in-order traversal)
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+// Main function
+int main() {
+    struct Node* root = NULL;
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 70);
+    root = insert(root, 60);
+    root = insert(root, 80);
+
+    printf("Inorder traversal of the BST: ");
+    inorder(root);
+    printf("\n");
+
+    printf("Delete node 20\n");
+    root = deleteNode(root, 20);
+    printf("Inorder traversal of the modified BST: ");
+    inorder(root);
+    printf("\n");
+
+    printf("Delete node 30\n");
+    root = deleteNode(root, 30);
+    printf("Inorder traversal of the modified BST: ");
+    inorder(root);
+    printf("\n");
+
+    printf("Delete node 50\n");
+    root = deleteNode(root, 50);
+    printf("Inorder traversal of the modified BST: ");
+    inorder(root);
+    printf("\n");
+
+    return 0;
+}
+
+graph 
+#include <stdio.h>
+#define V 5
+
+// Initialize matrix to 0
+void init(int arr[][V]) {
+    int i, j;
+    for (i = 0; i < V; i++)
+        for (j = 0; j < V; j++)
+            arr[i][j] = 0;
+}
+
+// Add edge: set arr[src][dest] = 1
+void addEdge(int arr[][V], int src, int dest) {
+    arr[src][dest] = 1;
+}
+
+// DFS function
+void DFS(int arr[][V], int vertex, int visited[]) {
+    // Mark the current vertex as visited and print it
+    visited[vertex] = 1;
+    printf("%d ", vertex);
+
+    // Recur for all adjacent vertices
+    for (int i = 0; i < V; i++) {
+        if (arr[vertex][i] == 1 && !visited[i]) {
+            DFS(arr, i, visited);
+        }
+    }
+}
+
+// Print adjacency matrix
+void printAdjMatrix(int arr[][V]) {
+    int i, j;
+    for (i = 0; i < V; i++) {
+        for (j = 0; j < V; j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int adjMatrix[V][V];
+    int visited[V] = {0}; // Initialize visited array to 0
+
+    // Initialize matrix and add edges
+    init(adjMatrix);
+    addEdge(adjMatrix, 0, 1);
+    addEdge(adjMatrix, 0, 2);
+    addEdge(adjMatrix, 0, 3);
+    addEdge(adjMatrix, 1, 3);
+    addEdge(adjMatrix, 1, 4);
+    addEdge(adjMatrix, 2, 3);
+    addEdge(adjMatrix, 3, 4);
+
+    // Print adjacency matrix
+    printf("Adjacency Matrix:\n");
+    printAdjMatrix(adjMatrix);
+
+    // Perform DFS traversal from vertex 0
+    printf("\nDFS Traversal starting from vertex 0:\n");
+    DFS(adjMatrix, 0, visited);
+
+    return 0;
+}
+https://practice.geeksforgeeks.org/contest/gfg-weekly-179-rated-contest/problems
+linked list graph 
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_VERTICES 100
+
+// Structure to represent a node in adjacency list
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new node
+struct Node* createNode(int data)
+{
+    struct Node* newNode = 
+      (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to add an edge to the graph
+void addEdge(struct Node* adj[], int u, int v)
+{
+    struct Node* newNode = createNode(v);
+    newNode->next = adj[u];
+    adj[u] = newNode;
+  
+    // Undirected graph
+    newNode = createNode(v);
+    newNode->next = adj[u];
+    adj[u] = newNode;
+}
+
+// Function to perform BFS
+void bfs(struct Node* adj[], int V, int s, 
+                             int visited[])
+{
+    int queue[MAX_VERTICES];
+    int front = 0, rear = 0;
+
+    visited[s] = 1; // Mark source as visited
+    queue[rear++] = s; // Enqueue source
+
+    while (front != rear) {
+        int curr = queue[front++]; // Dequeue vertex
+        printf("%d ", curr);
+
+        // Get all adjacent vertices of curr
+        struct Node* temp = adj[curr];
+        while (temp != NULL) {
+            int neighbor = temp->data;
+            if (!visited[neighbor]) {
+                visited[neighbor] = 1; // Mark as visited
+                queue[rear++] = neighbor; // Enqueue it
+            }
+            temp = temp->next;
+        }
+    }
+}
+
+// Function to perform BFS for the entire graph
+void bfsDisconnected(struct Node* adj[], int V)
+{
+    // Mark all vertices as not visited
+    int visited[V];
+    for (int i = 0; i < V; i++) {
+        visited[i] = 0;
+    }
+
+    for (int i = 0; i < V; ++i) {
+        if (!visited[i]) {
+            bfs(adj, V, i, visited);
+        }
+    }
+}
+
+int main()
+{
+    int V = 6; // Number of vertices
+    struct Node* adj[V];
+
+    for (int i = 0; i < V; ++i) {
+        adj[i] = NULL; // Initialize adjacency list
+    }
+
+    // Add edges to the graph
+    addEdge(adj, 0, 1);
+    addEdge(adj, 0, 2);
+    addEdge(adj, 3, 4);
+    addEdge(adj, 4, 5); 
+
+    // Perform BFS traversal for the entire graph
+    bfsDisconnected(adj, V);
+
+    return 0;
+}
+

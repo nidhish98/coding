@@ -265,3 +265,47 @@ vector<vector<string>> groupAnagrams(vector<string>& strs) {
 
     }
 };
+max consecutive square in an array  eise type where in subs
+blic:
+  bool perf(int x){
+    int y=sqrt(x);
+    if(y*y==x){
+        return 1;
+    }
+    return 0;
+  }
+    int longestSquareStreak(vector<int>& nums) {
+         if(nums.size()==0){
+            return 0;}
+        
+        unordered_set<long long>mpp;
+       long long count=1;
+        long long maxcount=-1;
+        for(int i=0;i<nums.size();i++){
+            mpp.insert(nums[i]);
+        }
+        for(auto it:mpp){
+         
+            long long x=it;
+             
+            x=x*x;
+             ////this means that i will start only at the first element of the sorted ascending subarray 
+
+                while(mpp.find(x)!=mpp.end()){
+                    cout<<x<<endl;
+                    x=x*x;
+                    count++;
+
+                }
+                maxcount=max(maxcount,count);
+                count=1;
+            }
+            if(maxcount==1){
+                return -1;
+            }
+            return maxcount;
+    }
+            
+        
+        };
+

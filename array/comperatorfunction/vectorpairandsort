@@ -1,0 +1,58 @@
+vector<pair<int,int>>v{{2,3},{2,1},{6,7}};
+    sort(v.begin(),v.end()); //ascending order 
+    for(auto it:v){
+        cout<<it.first<<" "<<it.second<<" ";
+    }
+    //used for comparing according to ur 
+    bool ismycomp(pair<int,int>v1,pair<int,int>v2){
+    if(v1.first<v2.first){
+        return true; //for asc
+    }
+    else if(v1.first==v2.first){
+         if(v2.first>v1.first){
+             return true;
+         }
+    }
+    return false;
+    
+}
+int main()
+{  //suppose if key me first wala same then sort accoridn to second value in desc
+    vector<pair<int,int>>v{{5,3},{6,1},{15,7}};
+    sort(v.begin(),v.end(),ismycomp); //ascending order 
+    for(auto it:v){
+        cout<<it.first<<" "<<it.second<<" ";
+    }
+
+    return 0;
+}
+LAMDA FUNCTION USED TO PASS VARIABLES IN SORTING IN[] BRACKET 
+SORTING ON BASIS OF MINIMUM DIFFERENCE OF ARRAY FROM K
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution {
+  public:
+void sortABS(int k, vector<int> &arr) {
+        // Using a lambda function to capture k and sort by absolute difference
+        //STABLE SORT MEANS IF DIFFRENCE COMES TO BE SAME THEN IT SORTS ACCORIDNG OT ORDER
+        stable_sort(arr.begin(), arr.end(), [k](int a, int b) {
+            int diffA = abs(a - k);
+            int diffB = abs(b - k);
+            if(diffA<diffB){
+                return true;
+            }
+            else{
+                return false;
+            }
+            //Sort by the minimum absolute difference with k
+        });
+    }
+};
+    
+
+
+/

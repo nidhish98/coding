@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "definition": "c",
-        "bfs (level order q)": "cpp"
+        "bfs (level order q)": "cpp",
+        "graph": "cpp"
     }
 }

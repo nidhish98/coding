@@ -35,6 +35,8 @@ int main() {
 
     return 0;
 }
+in q like if u want to intiailize 2d _VECTOR_
+vector<vector<int>>v(m,vector<int>(n,0)); //m and n are row,column
 
 set
 set<int>set 
